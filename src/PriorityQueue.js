@@ -1,15 +1,4 @@
-/**
- * Object to be appended in the priority queue.
- *
- * @class
- * @param 	mixed 	v
- * @param	integer	p
- * @author	Augusto Pascutti
- */
-var QueueItem = function(v, p) {
-	this.value    = v;
-	this.priority = p;
-};
+var _ = require('underscore');
 
 /**
  * Priority queue class.
@@ -46,9 +35,9 @@ PriorityQueue.prototype = {
 	 * @return 	void
 	 */
 	push: function(value, priority) {
-		this._queue.push(new QueueItem(value, priority));
-		this._queue.sort(this.compare());
-		this._maitain();
+	  var q = this._queue;
+	  q.splice(_.sortedIndex(q, value, this._compare), 0, value);
+		this._maintain();
 	},
 
 	/**
@@ -57,9 +46,9 @@ PriorityQueue.prototype = {
 	 * @return mixed
 	 */
 	pop: function() {
-		item = this._queue.shift();
-		this._maitain();
-		return (item) ? item.value : undefined;
+		item = this._queue.pop();
+		this._maintain();
+		return (item) ? item : undefined;
 	},
 
 	/**
@@ -68,8 +57,8 @@ PriorityQueue.prototype = {
 	 * @return mixed
 	 */
 	top: function() {
-		item = this._queue[0];
-		return (item) ? item.value : undefined;
+		item = _.last(this._queue);
+		return (item) ? item : undefined;
 	},
 
 	/**
@@ -78,9 +67,9 @@ PriorityQueue.prototype = {
 	 * @return mixed
 	 */
 	shift: function() {
-		item = this._queue.pop();
-		this._maitain();
-		return (item) ? item.value : undefined;
+		item = this._queue.shift();
+		this._maintain();
+		return (item) ? item : undefined;
 	},
 
 	/**
@@ -89,9 +78,8 @@ PriorityQueue.prototype = {
 	 * @return mixed
 	 */
 	bottom: function() {
-		idx  = this.length-1;
-		item = this._queue[idx];
-		return (item) ? item.value : undefined;
+		item = _.first(this._queue);
+		return (item) ? item : undefined;
 	},
 	
 	/**
@@ -100,7 +88,7 @@ PriorityQueue.prototype = {
 	 * @return Array
 	 */
 	getArray: function() {
-	    return this._queue || new Array();
+	    return this._queue || [];
 	},
 
 	/**
@@ -110,22 +98,7 @@ PriorityQueue.prototype = {
 	 */
 	reset: function() {
 		this._queue = [];
-		this._maitain();
-	},
-
-	/**
-	 * Returns the compare function.
-	 * If no compare function is set, defines a default one.
-	 *
-	 * @return Function
-	 */
-	compare: function() {
-		if (!this._compare) {
-			this._compare = function(a,b) {
-				return b.priority - a.priority;
-			};
-		}
-		return this._compare;
+		this._maintain();
 	},
 
 	/**
@@ -146,9 +119,9 @@ PriorityQueue.prototype = {
      *
 	 * @return void
 	 */
-	_maitain: function() {
-	    this.length = this._queue.length;
-		if ( this._size == 0 ) return;
+	_maintain: function() {
+	  this.length = this._queue.length;
+		if (this._size == 0) return;
 		while (this._size < this.length) {
 			this.shift();
 		}
