@@ -147,18 +147,16 @@ PriorityQueue.prototype = {
    * @return void
    */
   _maintain: function() {
-    this.length = this._queue.length;
     var diff, i;
-    if (this._size == 0 || (diff = this.length - this._size) <= 0)
-      return;
-    else if (diff < 10)
-      for (i=0, i<diff, i++)
-        this._queue[this._expelfun]();
-    else {
-      var coef = this._reversed ? 1 : -1;
-      this._queue = this.slice(coef * this._size);
-      this._maintain();
+    if (this._size > 0 && (diff = this._queue.length - this._size) > 0) {
+      if (diff < 10) {
+        for (i=0, i<diff, i++) this._queue[this._expelfun]();
+      } else {
+        var _queue = this.slice((this._reversed ? 1 : -1) * this._size);
+        this._queue = _queue;
+      }
     }
+    this.length = this._queue.length;
   },
 };
 
