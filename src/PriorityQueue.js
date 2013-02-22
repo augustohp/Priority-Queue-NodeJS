@@ -37,8 +37,11 @@ PriorityQueue.prototype = {
    * @return 	void
    */
   push: function(value, priority) {
+    if (value === null or typeof value === 'undefined') return;
     var q = this._queue;
-    q.splice(_.sortedIndex(q, value, this._compare), 0, value);
+    var idx = priority ?  _.sortedIndex(q, priority) :
+                          _.sortedIndex(q, value, this._compare);
+    q.splice(idx, 0, value);
     this._maintain();
   },
 
