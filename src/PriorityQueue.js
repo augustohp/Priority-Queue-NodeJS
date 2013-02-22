@@ -71,6 +71,28 @@ PriorityQueue.prototype = {
 		this._maintain();
 		return (item) ? item : undefined;
 	},
+	
+	/**
+	 * Remove and return a slice array starting from the bottom up to the provided 
+	 * index (when positive) or starting from some provided negative index from
+	 * the top up to the top.
+	 *
+	 * @return mixed
+	 */
+	slice: function(index) { 
+	  var newList = [], item, i;
+	  if (index > 0)
+	    for (i=0; i<index; i++) {
+	      item = this._queue.shift();
+        if (item != null) newList.push(item);
+	      else break;
+	    }
+	  else if (index < 0) {
+      newList = this._queue.splice(this.length+index);
+	  } else return [];
+	  this._maintain();
+    return newList;
+	},
 
 	/**
 	 * Returns the less important item value, without removing it.
