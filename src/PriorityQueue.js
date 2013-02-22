@@ -21,9 +21,11 @@ PriorityQueue.prototype = {
    * @param 	Function[optional] 	compare_function	Compare function to be used
    * @param	integer[optional]	maximum_size		Max number of elements to hold
    */
-  init: function(compare_function, maximum_size) {
+  init: function(compare_function, maximum_size, reversed) {
     this._compare = compare_function || undefined;
-    this._size    = maximum_size || 0 ;
+    this._size = maximum_size || 0 ;
+    this._reversed = reversed == null ? false : reversed;
+    this._expelfun = reversed ? 'pop' : 'shift';
     this.reset();
   },
 
@@ -143,10 +145,17 @@ PriorityQueue.prototype = {
    */
   _maintain: function() {
     this.length = this._queue.length;
-    if (this._size == 0) return;
-    while (this._size < this.length)
-      this.shift();
-    
+    var diff, i;
+    if (this._size == 0 || (diff = this.length - this._size) <= 0)
+      return;
+    else if (diff < 10)
+      for (i=0, i<diff, i++)
+        this._queue[this._expelfun]();
+    else {
+      var coef = this._reversed ? 1 : -1;
+      this._queue = this.slice(coef * this._size);
+      this._maintain();
+    }
   },
 };
 
