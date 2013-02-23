@@ -6,21 +6,17 @@
   ],
   "name": "pqueue",
   "description": "Simple priority Queue implementation for Node.js",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "homepage": "https://github.com/matehat/node-pqueue",
   "repository": {
     "type": "git",
     "url": "git://github.com/matehat/node-pqueue.git"
   },
-  "main": "src/PriorityQueue.js",
-  "scripts": {
-    "test": "node tests/PriorityQueue.js"
-  },
+  "main": "lib/index.js",
+  "scripts": {},
   "engines": {
     "node": "~0.8"
   },
-  "dependencies": {
-    "underscore": "~1"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }
