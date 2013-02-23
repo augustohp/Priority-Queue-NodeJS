@@ -30,7 +30,7 @@ class PriorityQueue
     
   
   
-  constructor: (opts) ->
+  constructor: (opts={}) ->
     @_capacity    = opts.capacity ? 0
     @_reversed    = opts.reversed ? false
     @_priority    = opts.priority ? identity
@@ -44,7 +44,7 @@ class PriorityQueue
     this
   
   
-  push: (items...) ->  
+  add: (items...) ->  
     q = @_queue
     index = @_sortedIndex.bind this
     for item in items
@@ -52,33 +52,28 @@ class PriorityQueue
     @_maintain()
     this
   
-  pop: ->
-    item = @_queue.pop()
-    @_maintain()
-    item
+  push: @::add
   
-  shift: ->
-    item = @_queue.shift()
-    @_maintain()
-    item
-  
-  
-  slice: (index) ->
-    q = @_queue
-    if index > 0
-      newList = []
-      for i in [0..index]
-        item = q.shift()
-        if item? then newList.push item
-        else break
-        
-    else if index < 0
-      newList = q.splice @length + index
-      
-    else return []
+  pop: (num) ->
+    result = 
+      if num? then  @_queue.splice @length - num
+      else          @_queue.pop()
     
     @_maintain()
-    newList
+    result
+  
+  shift: (num) ->
+    q = @_queue
+    if num?
+      result = []
+      for i in [0..num-1]
+        item = q.shift()
+        if item? then result.push item
+        else break
+    else
+      result = q.shift()
+    @_maintain()
+    result
   
   
   # This method was derived from 
@@ -105,5 +100,5 @@ class PriorityQueue
         @_queue = _queue
     null
   
-  
+
 module.exports = PriorityQueue
