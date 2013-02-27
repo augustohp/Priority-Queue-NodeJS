@@ -13,7 +13,9 @@
     "url": "git://github.com/matehat/node-pqueue.git"
   },
   "main": "lib/index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "node tests/pqueue.js"
+  },
   "engines": {
     "node": "~0.8"
   },
