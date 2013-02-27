@@ -1,6 +1,8 @@
 ## Priority Queue for Node.js
 
-It's a simple implementation of a **priority queue** for NodeJS.
+It's a simple implementation of a **priority queue** for Node.js. It uses binary search to keep items ordered as 
+they are inserted. By doing so, its performances are much more stable and attractive than the manual method of pushing 
+items into an array and using `#sort()` continuously.
 
 ### How do you use it?
 
