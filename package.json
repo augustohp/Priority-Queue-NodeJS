@@ -1,9 +1,16 @@
 {
-  "author": {
-    "name": "Augusto Pascutti",
-    "email": "augusto.hp@gmail.com",
-    "url": "http://github.com/augustohp"
-  },
+  "author": [
+    {
+        "name": "Augusto Pascutti",
+        "email": "augusto.hp@gmail.com",
+        "url": "http://github.com/augustohp"
+    },
+    {
+        "name": "Mathieu D'Amours",
+        "email": "mathieu@storm.io",
+        "url": "htt[://matehat.com"
+    }
+  ],
   "name": "queue-priority",
   "description": "Simple priority Queue implementation.",
   "version": "1.0.0",
@@ -11,14 +18,14 @@
   "homepage": "https://github.com/augustohp/Priority-Queue-NodeJS",
   "repository": {
     "type": "git",
-    "url": "https://github.com/augustohp/Priority-Queue-NodeJS.git"
+    "url": "git://github.com/matehat/node-pqueue.git"
   },
-  "main": "src/PriorityQueue.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "node tests/PriorityQueue.js"
+    "test": "node tests/pqueue.js"
   },
   "engines": {
-    "node": "~0.4"
+    "node": "~0.8"
   },
   "dependencies": {},
   "devDependencies": {}
