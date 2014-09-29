@@ -13,7 +13,7 @@
   ],
   "name": "queue-priority",
   "description": "Simple priority Queue implementation.",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "keyworkds": ["priority queue", "queue", "priority"],
   "homepage": "https://github.com/augustohp/Priority-Queue-NodeJS",
   "repository": {
