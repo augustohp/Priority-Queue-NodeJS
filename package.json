@@ -1,8 +1,13 @@
 {
-  "author": "Augusto Pascutti <augusto@phpsp.org.br> (http://www.augustopascutti.com)",
-  "name": "priority-queue",
-  "description": "Simple priority Queue implementation for NodeJS",
-  "version": "1.0.1",
+  "author": {
+    "name": "Augusto Pascutti",
+    "email": "augusto.hp@gmail.com",
+    "url": "http://github.com/augustohp"
+  },
+  "name": "queue-priority",
+  "description": "Simple priority Queue implementation.",
+  "version": "1.0.0",
+  "keyworkds": ["priority queue", "queue", "priority"],
   "homepage": "https://github.com/augustohp/Priority-Queue-NodeJS",
   "repository": {
     "type": "git",
